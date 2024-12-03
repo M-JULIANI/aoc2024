@@ -22,7 +22,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Day 1 solution')
     parser.add_argument('-p', '--part', type=int, choices=[1, 2], required=True,
                        help='Run part 1 or part 2 of the solution')
-    sorted_diff = SortedDiff("data/day1_p1.csv")
+    sorted_diff = SortedDiff("data/day1.csv")
     args = parser.parse_args()
     if args.part == 1:
         print(sorted_diff.part1())
