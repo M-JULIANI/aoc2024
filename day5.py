@@ -52,6 +52,18 @@ def verify_order(list,pairs):
             return False
     return True 
 
+def fix_order(list,pairs):
+    current_list = list
+    while not verify_order(current_list, pairs):
+        for src,dst in pairs:
+            if src not in current_list or dst not in current_list:
+                continue
+            if current_list.index(src) > current_list.index(dst):
+                src_idx = current_list.index(src)
+                dst_idx = current_list.index(dst)
+                current_list[src_idx], current_list[dst_idx] = current_list[dst_idx], current_list[src_idx]
+    return current_list
+
 def part1():    
     with open("data/day5.txt", "r") as f:
         first_part, second_part = f.read().split('\n\n')
@@ -76,7 +88,26 @@ def part1():
     
     return sum(middles)
 def part2():    
-    pass
+    with open("data/day5.txt", "r") as f:
+        first_part, second_part = f.read().split('\n\n')
+        
+        first_lines = first_part.strip().split('\n')
+        second_lines = second_part.strip().split('\n')
+        
+        updates = [[int(num) for num in line.split(',')] for line in second_lines]
+        print(f'updates: {updates}')
+        pairs = [tuple(map(int, line.split('|'))) for line in first_lines]
+        
+        middles = []
+        for line in updates:
+            if verify_order(line,pairs):
+                continue
+            else:
+                fixed = fix_order(line,pairs)
+                print(f'fixed: {fixed}')
+                middles.append(fixed[len(fixed)//2])
+    
+    return sum(middles)
 
 
 if __name__ == "__main__":
