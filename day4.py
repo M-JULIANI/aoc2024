@@ -8,8 +8,6 @@ def convolve_p1(row_pos, col_pos, grid):
     row_length = len(grid)
     col_length = len(grid[0])
     xmas_count = 0
-    target = "XMAS"
-    target_rev = "SAMX"
     
     directions = [
         (1,1),
